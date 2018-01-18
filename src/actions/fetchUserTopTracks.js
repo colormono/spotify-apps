@@ -12,7 +12,7 @@ export function fetchUserTopTracks() {
             method: 'get',
             url: 'https://api.spotify.com/v1/me/top/tracks',
             headers: {
-                'Authorization': 'Bearer ' + state.mainReducer.accessToken
+                'Authorization': 'Bearer ' + state.main.accessToken
             }
         }).then(response => {
             // Cargar los tracks en el store

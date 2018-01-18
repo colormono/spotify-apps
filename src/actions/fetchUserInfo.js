@@ -12,7 +12,7 @@ export function fetchUserInfo() {
             method: 'get',
             url: 'https://api.spotify.com/v1/me',
             headers: {
-                'Authorization': 'Bearer ' + state.mainReducer.accessToken
+                'Authorization': 'Bearer ' + state.main.accessToken
             }
         }).then(
             // Login

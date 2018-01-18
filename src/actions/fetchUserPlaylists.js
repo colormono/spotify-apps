@@ -7,7 +7,7 @@ export function fetchUserPlaylists() {
         // Get Authorization
         let state = getState();
         let s = new SpotifyWebApi();
-        s.setAccessToken( state.mainReducer.accessToken );
+        s.setAccessToken( state.main.accessToken );
         
         // Get Playlists
         s.getUserPlaylists({

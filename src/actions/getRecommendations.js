@@ -10,11 +10,11 @@ export default function getRecommendations() {
         // Solicitar autorización
         let state = getState();
         let s = new SpotifyWebApi();
-        s.setAccessToken( state.mainReducer.accessToken );
+        s.setAccessToken( state.main.accessToken );
 
         // Armar arreglo de ID de tracks
         let tracks = [];
-        state.mainReducer.userTopTracks.map((track, index) => {
+        state.main.userTopTracks.map((track, index) => {
             return tracks.push(track.id);
         });
         tracks = tracks.slice(0,4);

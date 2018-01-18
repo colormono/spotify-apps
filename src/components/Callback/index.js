@@ -53,14 +53,14 @@ class Callback extends Component {
         }
         // Autorización exitosa
         return (
-            <Redirect to="/analizando"/>
+            <Redirect to={`${process.env.PUBLIC_URL}/analizando`}/>
         );
     }
 }
 
 function mapStateToProps(state){
     return {
-        accessToken: state.mainReducer.accessToken
+        accessToken: state.main.accessToken
     };
 }
 

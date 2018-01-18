@@ -2,13 +2,17 @@
 // porque en store uso persistCombineReducers (para cachear state)
 //import { combineReducers } from 'redux';
 import config from '../config';
+import { reducer as formReducer } from 'redux-form';
+import mecanicaReducer from './mecanicaReducer';
 import mainReducer from './mainReducer';
 
 // Capas de datos
 //export default combineReducers({
 const reducers = {
-    config: config,
-    mainReducer
+  config,
+  mecanica: mecanicaReducer,
+  main: mainReducer,
+  form: formReducer
 };
 
 export default reducers;

@@ -11,7 +11,7 @@ export function fetchUserTopArtists() {
             method: 'get',
             url: 'https://api.spotify.com/v1/me/top/artists',
             headers: {
-                'Authorization': 'Bearer ' + state.mainReducer.accessToken
+                'Authorization': 'Bearer ' + state.main.accessToken
             }
         }).then(response => dispatch(setUserTopArtists(response.data.items)));
     };

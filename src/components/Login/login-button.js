@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 
 class LoginButton extends Component {
 
     getAuthorization() {
+        // Track
+        ReactGA.event({
+            category: 'Clicks',
+            action: 'Click',
+            label: 'Login'
+        });
+
+        // Crear URL
         let url = 
             'https://accounts.spotify.com/authorize?client_id=' + this.props.config.clientId +
             '&redirect_uri=' + encodeURIComponent(this.props.config.redirectUri) +
@@ -43,10 +52,7 @@ class LoginButton extends Component {
     render() {
         return( 
             <div>
-                <button 
-                    onClick={() => this.getAuthorization()}
-                    className="btn btn-primary"
-                >Comenzar</button>
+                <button onClick={() => this.getAuthorization()} className="btn">Entrar con Spotify</button>
             </div>
         );
     }

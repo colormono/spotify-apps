@@ -1,14 +1,23 @@
 import React from 'react';
-import logo from './logo.png';
-import './styles.css';
+//import logo from '../../images/logo.png';
 
 const Header = () => {
     return(
-        <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Spotify App</h1>
-        </header>
+        <section className="header">
+            <span>
+                {
+                    //<img src={logo} alt="HBO GO" />
+                }
+            </span>
+        </section>
     );
 }
 
-export default Header;
+const ConditionalHeader = ({ isLoggedIn }) => {
+    if (isLoggedIn) {
+        return (<Header />);
+    }
+    return (<div></div>);
+}
+
+export default ConditionalHeader;

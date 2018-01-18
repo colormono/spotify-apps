@@ -2,13 +2,17 @@ import actionsEnum from '../actions/actionsEnum';
 
 class mainState {
     constructor() {
-        this.isLogin = false;
-        this.accessToken = '';
-        this.user = {};
-        this.userPlaylists = {};
-        this.userTopArtists = {};
-        this.userTopTracks = {};
-        this.audioFeatures = {};
+        this.isLogin = false; // Estado del login
+        this.accessToken = ''; // Token de acceso
+
+        this.user = {}; // Datos del usuario
+        this.userPlaylists = {}; // Sus playlists
+        this.userTopArtists = {}; // Sus artistas favoritos
+        this.userTopTracks = {}; // Sus canciones favoritas
+        this.audioFeatures = {}; // Características de las canciones
+
+        this.userScore = {}; // Puntos 
+
         this.recommendations = {};
         this.customPlaylist = {};
     }
@@ -43,6 +47,9 @@ const mainReducer = (state= new mainState(), action) => {
         
         case actionsEnum.SET_CUSTOM_PLAYLIST:
         return handleSetCustomPlaylist(state, action);
+        
+        case actionsEnum.SET_USER_SCORE:
+        return handleSetUserScore(state, action);
         
         default:
         return state;
@@ -116,6 +123,13 @@ const handleSetCustomPlaylist = (state, action) => {
     return {
         ...state,
         customPlaylist: action.payload
+    }
+}
+
+const handleSetUserScore = (state, action) => {
+    return {
+        ...state,
+        userScore: action.payload
     }
 }
 

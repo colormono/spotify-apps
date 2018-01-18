@@ -22,11 +22,11 @@ class Game extends Component {
 
 function mapStateToProps(state){
     return {
-        user: state.mainReducer.user,
-        playlists: state.mainReducer.userPlaylists,
-        artists: state.mainReducer.userTopArtists,
-        tracks: state.mainReducer.userTopTracks,
-        analisis: state.mainReducer.audioFeatures
+        user: state.main.user,
+        playlists: state.main.userPlaylists,
+        artists: state.main.userTopArtists,
+        tracks: state.main.userTopTracks,
+        analisis: state.main.audioFeatures
     }
 }
 

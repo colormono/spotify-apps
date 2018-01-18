@@ -1,22 +1,25 @@
 // Video Documentation: https://github.com/CookPete/react-player
 // Video Example: https://github.com/CookPete/react-player/blob/master/src/demo/App.js
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import ReactPlayer from 'react-player';
-import Duration from './duration';
+import ReactGA from 'react-ga';
+//import Duration from './duration';
 
 const MULTIPLE_SOURCES = [
-    { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4' },
-    { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogv' },
-    { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm' }
+    { src: process.env.PUBLIC_URL + '/media/video.mp4', type: 'video/mp4' },
+    { src: process.env.PUBLIC_URL + '/media/video.webm', type: 'video/webm' },
+    { src: process.env.PUBLIC_URL + '/media/video.mov', type: 'video/mov' },
+    { src: process.env.PUBLIC_URL + '/media/video.ogg', type: 'video/ogg' }
 ]
 
-export default class VideoPlayer extends Component {
+class VideoPlayer extends Component {
     state = {
         //url: 'http://www.youtube.com/watch?v=xa8ax-zHoGo',
         url: MULTIPLE_SOURCES,
         playing: true,
-        controls: false,
+        controls: true,
+        preload: true,
         played: 0,
         duration: 0,
         ended: false
@@ -26,39 +29,65 @@ export default class VideoPlayer extends Component {
         this.setState(state);
     }
     
-    render() {
-        const { url, playing, controls, duration, played } = this.state;
+    onEnded = state => {
+        console.log("termino el video");
+        this.setState({ ended: true });
 
-        if(!this.ended) {
+        ReactGA.event({
+            category: 'Evento',
+            action: 'Vio video completo',
+            label: 'Advertising',
+            nonInteraction: true
+        });
+    }
+
+    trackEvent() {
+        ReactGA.event({
+            category: 'Clicks',
+            action: 'Click',
+            label: 'Skip video'
+        });
+    }
+    
+    render() {
+        const { url, playing, controls, duration, played, ended } = this.state;
+
+        if(!ended) {
             return (
-                <div>
+                <section className="video">
                     <ReactPlayer 
                         url={url}
                         playing={playing} 
                         controls={controls}
                         onReady={() => console.log('onReady')}
                         onStart={() => console.log('onStart')}
-                        onEnded={() => this.setState({ ended: true })}
+                        onEnded={this.onEnded}
                         onProgress={this.onProgress}
                         onDuration={duration => this.setState({ duration })}
                         style={{ margin: '0px auto' }}
+                        className="player"
                     />
+                    <div className="info">
                     {
                         // Skip video después de 10 segundos
                         (duration * played) < 10
-                        ? <div>
-                            <p><em>"Ajustando parámetros según tus preferencias musicales"</em></p>
-                            <p>elapsed: <Duration seconds={duration * played} /></p>
-                        </div>
-                        : <Link to="/resultado"><button className="btn btn-primary">Skip video</button></Link>
+                        ? <p>
+                            <span>ESTAMOS ANALIZANDO TU PERFIL</span>
+                            { //<br>elapsed: <Duration seconds={duration * played} /></p> 
+                            }
+                        </p>
+                        : <Link to={`${process.env.PUBLIC_URL}/resultado`}><button className="btn btn-small">Continuar</button></Link>
                     }
-                </div>
+                    </div>
+                </section>
             )
         }
         return (
             <div>
-                <Redirect to="/resultado"/>
+                <Redirect to={`${process.env.PUBLIC_URL}/resultado`} onClick={this.trackEvent()} />
             </div>
         );
     }
 }
+
+export default withRouter(VideoPlayer);

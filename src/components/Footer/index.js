@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import logo from '../../images/logo-spotify-green.png';
+//import LogoutButton from '../Login/logout-button';
 
-const Footer = (props) => {
-    return(
-        <footer className="footer">
-            <hr />
-            <p>Powered by Spotify</p>
-            <p>Handcrafted by <a href="http://socialsnack.com">SocialSnack</a></p>
-        </footer>
-    );
+class Footer extends Component {
+
+    render() {
+        return(
+            <footer className="footer">
+                <small>POWERED BY</small>
+                <span><img src={logo} alt="Spotify" /></span>
+                { 
+                    //this.props.isLogin ? <LogoutButton /> : <i /> 
+                }
+            </footer>
+        )
+    }
 }
 
-export default Footer
+function mapStateToProps(state){
+    return {
+        isLogin: state.main.isLogin
+    };
+}
+
+export default connect(mapStateToProps)(Footer);

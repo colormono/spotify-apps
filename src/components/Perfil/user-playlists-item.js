@@ -1,11 +1,15 @@
 import React from 'react';
+import defaultThumb from '../../images/logo.png';
 
 const UserPlaylistsItem = ({playlist, onPlaylistSelect}) => {
     if(!playlist){
         return <div>Loading</div>;
     }
 
-    const imageUrl = playlist.images[0].url;
+    let imageUrl = {defaultThumb};
+    if(playlist.images[0]){
+        imageUrl = playlist.images[0].url;
+    }
 
     const cardStyle = {
         width: '14rem',
