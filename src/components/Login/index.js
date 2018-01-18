@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import Background from './background';
+import Background from './background';
 import logo from '../../images/logo.png';
 import LoginButton from './login-button';
 import LogoutButton from './logout-button';
+import Modal from '../Modal';
 
 class Login extends Component {
   render() {
@@ -16,9 +17,10 @@ class Login extends Component {
           <h2>Descubre qué fan de ******* eres y participa por *******.</h2>
           {this.props.isLogin ? <LogoutButton /> : <LoginButton />}
         </article>
-        {
-          //<Background />
-        }
+        <Modal>
+          <h1>Hello world!</h1>
+          <Background />
+        </Modal>
       </section>
     );
   }

@@ -24,6 +24,7 @@
     "redux-persist": "^5.3.3",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
     "spotify-web-api-js": "^0.22.1"
   },
   "scripts": {

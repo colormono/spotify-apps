@@ -69,6 +69,8 @@ Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
 * [Redux Thunk](https://github.com/gaearon/redux-thunk) - Middleware que permite crear acciones que devuelven funciones en lugar de acciones
 * [Redux Logger](https://github.com/evgenyrodionov/redux-logger) - Middleware para generar log en la consola
 * [Redux Forms](https://redux-form.com/7.2.0/) - Formularios
+* [Redux Reselect](https://github.com/reactjs/reselect) - Librería para agrupar selecciones para Redux
+
 
 ### React components
 * [React Router](https://reacttraining.com/react-router) - URLs amigables, control de rutas

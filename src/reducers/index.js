@@ -12,7 +12,10 @@ const reducers = {
   config,
   mecanica: mecanicaReducer,
   main: mainReducer,
-  form: formReducer
+  form: formReducer,
+  selectedPostsIds: function() {
+    return ['bigLittleLies','ballers'];
+  }
 };
 
 export default reducers;

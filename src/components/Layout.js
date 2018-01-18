@@ -14,6 +14,7 @@ import Analizer from './Analizer';
 import Perfil from './Perfil';
 import Results from './Results';
 import Formulario from './Formulario';
+import Selection from './Selection';
 
 // Styles
 import '../styles/App.css';
@@ -38,6 +39,7 @@ class Layout extends Component {
                         <Route path={`${process.env.PUBLIC_URL}/perfil`} component={Perfil} />
                         <Route path={`${process.env.PUBLIC_URL}/resultado`} component={Results} />
                         <Route path={`${process.env.PUBLIC_URL}/formulario`} component={Formulario} />
+                        <Route path={`${process.env.PUBLIC_URL}/selection`} component={Selection} />
                     </section>
                 </Router>
                 <Footer />
