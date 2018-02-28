@@ -2,19 +2,88 @@
 v2.0 | 20110126
 License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, button {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+button {
   margin: 0;
   padding: 0;
   border: 0;
@@ -23,21 +92,34 @@ time, mark, audio, video, button {
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 body {
   line-height: 1;
 }
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
   content: '';
   content: none;
 }
@@ -72,18 +154,18 @@ table {
 }
 
 @font-face {
-  font-family: "spotifyapp";
-  src:url("../fonts/spotifyapp.eot");
-  src:url("../fonts/spotifyapp.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/spotifyapp.woff") format("woff"),
-    url("../fonts/spotifyapp.ttf") format("truetype"),
-    url("../fonts/spotifyapp.svg#spotifyapp") format("svg");
+  font-family: 'spotifyapp';
+  src: url('../fonts/spotifyapp.eot');
+  src: url('../fonts/spotifyapp.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/spotifyapp.woff') format('woff'),
+    url('../fonts/spotifyapp.ttf') format('truetype'),
+    url('../fonts/spotifyapp.svg#spotifyapp') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [data-icon]:before {
-  font-family: "spotifyapp" !important;
+  font-family: 'spotifyapp' !important;
   content: attr(data-icon);
   font-style: normal !important;
   font-weight: normal !important;
@@ -95,9 +177,9 @@ table {
   -moz-osx-font-smoothing: grayscale;
 }
 
-[class^="icon-"]:before,
-[class*=" icon-"]:before {
-  font-family: "spotifyapp" !important;
+[class^='icon-']:before,
+[class*=' icon-']:before {
+  font-family: 'spotifyapp' !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
@@ -111,64 +193,64 @@ table {
 }
 
 .icon-spotify:before {
-  content: "\61";
+  content: '\61';
 }
 .icon-facebook:before {
-  content: "\62";
+  content: '\62';
 }
 .icon-facebook-square:before {
-  content: "\63";
+  content: '\63';
 }
 .icon-facebook-official:before {
-  content: "\64";
+  content: '\64';
 }
 .icon-twitter-square:before {
-  content: "\65";
+  content: '\65';
 }
 .icon-twitter:before {
-  content: "\66";
+  content: '\66';
 }
 .icon-times-circle-o:before {
-  content: "\67";
+  content: '\67';
 }
 .icon-times-circle:before {
-  content: "\68";
+  content: '\68';
 }
 .icon-times:before {
-  content: "\69";
+  content: '\69';
 }
 .icon-youtube-play:before {
-  content: "\6a";
+  content: '\6a';
 }
 .icon-play-circle-o:before {
-  content: "\6b";
+  content: '\6b';
 }
 .icon-play-circle:before {
-  content: "\6c";
+  content: '\6c';
 }
 .icon-play:before {
-  content: "\6d";
+  content: '\6d';
 }
 .icon-foursquare:before {
-  content: "\6e";
+  content: '\6e';
 }
 .icon-zoom-in:before {
-  content: "\6f";
+  content: '\6f';
 }
 .icon-zoom-out:before {
-  content: "\70";
+  content: '\70';
 }
 
 /* GLOBALS */
 
-html{
+html {
   overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
-  color: #FFF;
+  color: #fff;
   line-height: 1.33;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: antialiased;
@@ -180,19 +262,19 @@ img {
   height: auto;
 }
 
-a{
+a {
   color: #00b8f9;
   text-decoration: none;
 }
 
-p{
+p {
   margin-bottom: 14px;
 }
 
 .btn {
   background: #000;
-  color: #FFF;
-  border: 1px solid #FFF;
+  color: #fff;
+  border: 1px solid #fff;
   border-radius: 24px;
   font-size: 18px;
   padding: 10px 30px;
@@ -204,48 +286,64 @@ p{
   text-decoration: none;
   display: inline-block;
 
-  &:hover{
-    background: #FFF;
+  &:hover {
+    background: #fff;
     color: #000;
   }
 }
 
-.btn-small{
+.btn-small {
   font-size: 13px;
 }
 
-.btn-primary{
+.btn-primary {
   background: #00b8f9;
   color: #003861;
   border: 1px solid #003861;
   font-size: 13px;
-  
-  &:hover{
+
+  &:hover {
     background: #003861;
     color: #00b8f9;
     border: 1px solid #00b8f9;
   }
 }
 
-footer .btn-small{
+footer .btn-small {
   letter-spacing: 0px;
-  margin: 4px 4px 4px 16px; 
+  margin: 4px 4px 4px 16px;
   padding: 4px 8px;
   color: #666;
   border: none;
 }
 
-#root{
+#root {
   background: #000;
 
-  &.serie-ballers{ background-image: url(../images/bg-ballers.jpg); }
-  &.serie-bigLittleLies{ background-image: url(../images/bg-bigLittleLies.jpg); }
-  &.serie-girls{ background-image: url(../images/bg-girls.jpg); }
-  &.serie-insecure{ background-image: url(../images/bg-insecure.jpg); }
-  &.serie-siliconValley{ background-image: url(../images/bg-siliconValley.jpg); }
-  &.serie-theDeuce{ background-image: url(../images/bg-theDeuce.jpg); }
-  &.serie-gameOfThrones{ background-image: url(../images/bg-gameOfThrones.jpg); }
-  &.serie-westworld{ background-image: url(../images/bg-westworld.jpg); }
+  &.serie-ballers {
+    background-image: url(../images/bg-ballers.jpg);
+  }
+  &.serie-bigLittleLies {
+    background-image: url(../images/bg-bigLittleLies.jpg);
+  }
+  &.serie-girls {
+    background-image: url(../images/bg-girls.jpg);
+  }
+  &.serie-insecure {
+    background-image: url(../images/bg-insecure.jpg);
+  }
+  &.serie-siliconValley {
+    background-image: url(../images/bg-siliconValley.jpg);
+  }
+  &.serie-theDeuce {
+    background-image: url(../images/bg-theDeuce.jpg);
+  }
+  &.serie-gameOfThrones {
+    background-image: url(../images/bg-gameOfThrones.jpg);
+  }
+  &.serie-westworld {
+    background-image: url(../images/bg-westworld.jpg);
+  }
 }
 
 .app {
@@ -254,19 +352,19 @@ footer .btn-small{
   min-height: 100vh;
 }
 
-section.header{
+section.header {
   margin: 30px 1em 0px;
   display: flex;
   justify-content: flex-end;
 
-  span{
+  span {
     position: relative;
     z-index: 100;
     max-width: 70px;
   }
 }
 
-section.main{
+section.main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -276,14 +374,14 @@ section.main{
   margin: 0px auto;
 }
 
-footer.footer{
+footer.footer {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   margin-bottom: 1em;
 
-  span{
+  span {
     margin-left: 0.66em;
     width: 90px;
   }
@@ -291,23 +389,23 @@ footer.footer{
 
 /* SECTIONS */
 
-section.login{
+section.login {
   text-align: center;
 
-  h2{
+  h2 {
     max-width: 350px;
     margin: 10px auto 20px;
     font-size: 18px;
   }
 
-  article{
+  article {
     max-width: 460px;
     margin: 0px auto;
     padding: 30px;
     position: relative;
     z-index: 50;
-      
-    img{
+
+    img {
       max-width: 256px;
     }
   }
@@ -320,61 +418,60 @@ section.video {
   display: flex;
   flex-direction: column;
 
-  .player{
+  .player {
     box-shadow: 0px 0px 100px #000;
     width: 90% !important;
     max-width: 640px !important;
     height: auto !important;
   }
 
-  .info{
+  .info {
     text-align: center;
     margin: 1em;
   }
 }
 
 section.resultado {
-
-  .row{
+  .row {
     display: flex;
     align-items: flex-end;
   }
 
   // Perfil
 
-  .perfil{
+  .perfil {
     flex-grow: 1;
     justify-content: center;
     margin: 10px 20px;
     text-align: center;
     text-shadow: 0px 0px 10px #000;
-    
-    h1{
+
+    h1 {
       max-width: 300px;
       margin: 0px auto;
     }
 
-    h2{
+    h2 {
       font-size: 32px;
     }
 
-    strong{
+    strong {
       color: #049dd3;
     }
   }
 
   .perfil hgroup,
-  .series{
+  .series {
     max-width: 500px;
     margin: 0px auto;
   }
 
-  .series{
+  .series {
     display: flex;
     flex-direction: row;
   }
 
-  .serie{
+  .serie {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -382,7 +479,7 @@ section.resultado {
     flex-grow: 1;
     margin: 15px;
     position: relative;
-  } 
+  }
 
   // Playlist
 
@@ -401,7 +498,7 @@ section.resultado {
     align-items: center;
   }
 
-  .sharing{
+  .sharing {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -409,22 +506,22 @@ section.resultado {
     margin-top: -7px;
     padding: 10px;
     font-size: 13px;
-    
-    span{
+
+    span {
       margin-right: 10px;
     }
   }
 
-  .SocialMediaShareButton{
+  .SocialMediaShareButton {
     cursor: pointer;
     transition: color 0.3s ease-in-out;
-    
-    &:hover{
+
+    &:hover {
       color: #00b8f9;
     }
   }
 
-  .icon{
+  .icon {
     font-size: 18px;
     padding: 5px;
   }
@@ -440,7 +537,7 @@ section.resultado {
   cursor: ns-resize;
   margin: 0px auto;
   position: relative;
-  
+
   .Slider-circle,
   .Slider-bar {
     fill: transparent;
@@ -454,7 +551,7 @@ section.resultado {
     stroke-dasharray: 0;
   }
 }
-.Slider-percent{
+.Slider-percent {
   z-index: 9;
   position: absolute;
   bottom: 30px;
@@ -463,5 +560,5 @@ section.resultado {
   text-align: center;
 }
 
-@media (max-width: 720px){
+@media (max-width: 720px) {
 }

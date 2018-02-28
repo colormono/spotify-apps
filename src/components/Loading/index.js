@@ -1,9 +1,0 @@
-import React from 'react';
-
-const Loading = (props) => {
-    return(
-        <div>Cargando...</div>
-    );
-}
-
-export default Loading;

@@ -32,6 +32,3 @@ export const configureStore = () => {
 };
 
 export default configureStore;
-
-// Dispach simple objects
-//store.dispatch({ type: 'FOO', payload: 'Mono' })
