@@ -7,4 +7,5 @@ export * from './Loading';
 export * from './Playlist';
 export * from './PoweredBy';
 export * from './SharingButtons';
+export * from './SocialButtons';
 export * from './VideoPlayer';

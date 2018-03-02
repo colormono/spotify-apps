@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
+  LOGOUT_USER,
   FETCH_USER_INFO
 } from './types';
 
@@ -21,6 +22,8 @@ const loginUserSuccess = (dispatch, token) => {
     type: LOGIN_USER_SUCCESS,
     payload: token
   });
+
+  // fetchUserInfo?
 };
 
 const loginUserFail = (dispatch) => {
@@ -44,6 +47,8 @@ export const fetchUserInfo = (dispatch) => {
           payload: response.data
         });
       })
-      .catch((error) => console.log(error));
+      .catch(() => {
+        dispatch({ type: LOGOUT_USER })
+      });
   };
 }

@@ -6,10 +6,9 @@
  * Example: https://github.com/CookPete/react-player/blob/master/src/demo/App.js
  */
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import ReactGA from 'react-ga';
-//import Duration from './VideoPlayerDuration';
 
 const MULTIPLE_SOURCES = [
   { src: process.env.PUBLIC_URL + '/media/video.mp4', type: 'video/mp4' },
@@ -22,7 +21,7 @@ class VideoPlayer extends Component {
   state = {
     //url: 'http://www.youtube.com/watch?v=xa8ax-zHoGo',
     url: MULTIPLE_SOURCES,
-    playing: false,
+    playing: true,
     controls: true,
     preload: true,
     played: 0,
@@ -35,7 +34,6 @@ class VideoPlayer extends Component {
   };
 
   onEnded = state => {
-    console.log('termino el video');
     this.setState({ ended: true });
 
     ReactGA.event({
@@ -46,20 +44,12 @@ class VideoPlayer extends Component {
     });
   };
 
-  trackEvent() {
-    ReactGA.event({
-      category: 'Clicks',
-      action: 'Click',
-      label: 'Skip video'
-    });
-  }
-
   render() {
     const { url, playing, controls, duration, played, ended } = this.state;
 
     if (!ended) {
       return (
-        <section className="video">
+        <article className="video-player">
           <ReactPlayer
             url={url}
             playing={playing}
@@ -72,32 +62,20 @@ class VideoPlayer extends Component {
             style={{ margin: '0px auto' }}
             className="player"
           />
-          <div className="info">
-            {// Skip video después de 10 segundos
-              duration * played < 10 ? (
-                <p>
-                  <span>ESTAMOS ANALIZANDO TU PERFIL</span>
-                  {
-                    //<br>elapsed: <Duration seconds={duration * played} /></p>
-                  }
-                </p>
+          <div className="hidden">
+            {
+              duration * played > 5 ? (
+                <p>Vió más de 5 segundos</p>
               ) : (
-                  <Link to={`${process.env.PUBLIC_URL}/resultado`}>
-                    <button className="btn btn-small">Continuar</button>
-                  </Link>
-                )}
+                  <p>Vio menos de 5 segundos</p>
+                )
+            }
           </div>
-        </section>
+        </article>
       );
     }
-    return (
-      <div>
-        <Redirect
-          to={`${process.env.PUBLIC_URL}/resultado`}
-          onClick={this.trackEvent()}
-        />
-      </div>
-    );
+
+    return <Redirect to={`${process.env.PUBLIC_URL}/resultado`} />
   }
 }
 

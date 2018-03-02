@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { LoginButton } from './common';
 
 import logo from '../images/logo.png';
 
 class HomeScreen extends Component {
-  renderLoginButton() {
-    return <LoginButton title="Entrar con Spotify" config={this.props.config} />
-  }
-
   render() {
     return (
-      <section className="login">
+      <section className="section-home">
+
+        <figure>
+          <img src={logo} className="home-logo" alt="logo" />
+        </figure>
 
         <hgroup>
-          <h1>
-            <img src={logo} className="App-logo" alt="logo" />
-          </h1>
           <h2>Descubre qué fan de ******* eres y participa por *******.</h2>
+          <LoginButton title="Entrar con Spotify" config={this.props.config} />
         </hgroup>
 
-        {this.renderLoginButton()}
-        <Link to="/trivia">
-          <button className="btn">Entrar como invitado</button>
-        </Link>
       </section>
     );
   };
@@ -36,4 +30,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(HomeScreen);
+export default withRouter(connect(mapStateToProps)(HomeScreen));

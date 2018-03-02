@@ -7,12 +7,13 @@ import {
 const INITIAL_STATE = {
   recommendations: {},
   playlist: {
-    user: 'spotify',
-    id: '37i9dQZF1DWU8yQ1nTMCfh',
+    loading: true,
+    user: '',
+    id: '',
     meta: {
       title: 'SocialSnack',
       description: 'Una playlist que te hará vibrar.',
-      cover: 'http://miseriehbo.com/images/cover-ballers.jpg'
+      cover: 'http://dominio.com/images/cover-default.jpg'
     }
   }
 };
@@ -27,7 +28,13 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     case FETCH_RECOMMENDATIONS:
-      return { ...state, recommendations: action.payload };
+      return {
+        ...state,
+        recommendations: action.payload,
+        playlist: {
+          loading: true
+        }
+      };
 
     case CREATE_CUSTOM_PLAYLIST:
       return {
@@ -35,7 +42,8 @@ export default (state = INITIAL_STATE, action) => {
         playlist: {
           ...state.playlist,
           id: action.payload.id,
-          user: action.payload.user
+          user: action.payload.user,
+          loading: false
         }
       };
 

@@ -1,79 +1,83 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import ReactGA from 'react-ga';
+import MDSpinner from 'react-md-spinner';
 import { createCustomPlaylist } from '../actions';
-import { SharingButtons, Playlist } from './common';
+import { Header, SharingButtons, Playlist } from './common';
 
 class ResultScreen extends Component {
   state = {
-    useCustomPlaylist: true,
-    playlistLoading: true
+    createNewPlaylist: true
   }
 
   componentWillMount() {
-    if (this.state.useCustomPlaylist) {
-      this.props.createCustomPlaylist();
-    } else {
-
-      const { id, user } = this.props.playlist;
-      // this.props.loadPlaylist(user, id);
+    if (this.state.createNewPlaylist) {
+      //this.props.createCustomPlaylist();
     }
-  }
-
-  componentDidMount() {
-    this.setState({ playlistLoading: false });
   }
 
   renderPlaylist() {
-    const { id, user } = this.props.playlist;
-
-    if (id) {
-      return <Playlist user={user} id={id} loading={this.state.playlistLoading} />
+    const { id, user, loading } = this.props.playlist;
+    if (!loading) {
+      return <Playlist user={user} id={id} />
     }
+
+    return (
+      <div className="spinner">
+        <MDSpinner
+          size={48}
+          singleColor="rgb(223,37,140)"
+        />
+      </div>
+    );
   }
 
   onCtaButtonPress() {
-    // Trackar evento
     ReactGA.event({
       category: 'Clicks',
       action: 'Click',
-      label: 'Descargar App'
+      label: 'CTA Click'
     });
-    window.open('http://miseriehbo.com/adlink.php', '_blank');
+    window.open('https://www.nike.com/ar/es_la/c/innovation/react', '_blank');
   };
 
   render() {
-
     return (
-      <section className="resultado">
-        <div className="row">
-          <article className="perfil">
+      <div>
+        <Header />
 
-            <hgroup>
-              <h2>ERES <strong>{Math.round(12.5)}%</strong></h2>
-              <button onClick={this.onCtaButtonPress.bind(this)}>Descarga la app de HBOGO y obtén 1 mes gratis</button>
-            </hgroup>
+        <section className="section-resultado">
 
-          </article>
+          <hgroup className="resultado-header">
+            <h2>MARATÓN MUSICAL</h2>
+            <p>Reprehenderit dignissimos ut. Qui qui magnam omnis dolorem occaecati architecto labore non repellendus. Aliquid labore nemo sit accusantium.</p>
+            <button onClick={this.onCtaButtonPress.bind(this)} className="btn btn-primary">
+              CONOCÉ NIKE REACT
+            </button>
+          </hgroup>
 
-          <article className="playlist">
+          <article className="resultado-playlist">
             {this.renderPlaylist()}
-            <SharingButtons serie={this.state.serieNombre} shareUrl={'http://miseriehbo.com/share-id.html'} />
           </article>
 
-        </div>
+          <aside className="resultado-share">
+            <SharingButtons shareUrl={`${this.props.baseUri}/share.html`} />
+          </aside>
 
-      </section>
+        </section>
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
+    baseUri: state.config.baseUri,
     playlist: state.result.playlist
   }
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   createCustomPlaylist
-})(ResultScreen);
+})(ResultScreen));

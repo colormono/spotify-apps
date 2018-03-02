@@ -8,7 +8,11 @@ export default function () {
     scopes: [
       'user-read-email',
       'user-library-read',
-      'user-read-recently-played'
+      'user-top-read',
+      'user-read-recently-played',
+      'playlist-modify-public',
+      'playlist-modify-private',
+      'ugc-image-upload'
     ]
   }
 }

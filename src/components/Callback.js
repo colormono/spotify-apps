@@ -27,7 +27,6 @@ class Callback extends Component {
     var token = getParameterByName('access_token');
     if (token) {
       this.props.loginUser({ token })
-      console.log(token);
     }
   }
 

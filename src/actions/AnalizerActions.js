@@ -38,6 +38,8 @@ export const fetchUserTopTracks = () => {
           payload: response.items
         })
       )
+
+      // EJECUTAR LA MECÁNICA
       .then(() => { calculateUserScore(dispatch) })
       .catch(() => {
         dispatch({ type: LOGOUT_USER })

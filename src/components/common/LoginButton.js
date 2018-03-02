@@ -9,7 +9,7 @@ class LoginButton extends Component {
     ReactGA.event({
       category: 'Clicks',
       action: 'Click',
-      label: 'Login'
+      label: 'Spotify Login'
     });
 
     // Crear URL
@@ -26,8 +26,8 @@ class LoginButton extends Component {
 
   render() {
     return (
-      <button onClick={() => this.getAuthorization()} className="btn">
-        {this.props.title ? this.props.title : 'Entrar con Spotify'}
+      <button onClick={this.getAuthorization.bind(this)} className="btn">
+        <i className='icon-spotify'></i> {this.props.title ? this.props.title : 'Entrar con Spotify'}
       </button>
     );
   }
