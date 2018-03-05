@@ -21,7 +21,7 @@ class VideoPlayer extends Component {
   state = {
     //url: 'http://www.youtube.com/watch?v=xa8ax-zHoGo',
     url: MULTIPLE_SOURCES,
-    playing: true,
+    playing: false,
     controls: true,
     preload: true,
     played: 0,

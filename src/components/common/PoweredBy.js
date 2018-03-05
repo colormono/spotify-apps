@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../../images/logo-spotify-green.png';
+import logo from '../../images/logo-spotify-white.png';
 
 class PoweredBy extends Component {
   render() {

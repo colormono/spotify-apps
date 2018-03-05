@@ -419,8 +419,10 @@ p {
   margin-bottom: 14px; }
 
 a {
-  color: #00b8f9;
+  color: #FFF;
   text-decoration: none; }
+  a:hover {
+    color: #231f20; }
 
 .btn {
   cursor: pointer;
@@ -442,7 +444,7 @@ a {
   font-size: 13px; }
 
 .btn-primary {
-  background: #df258c;
+  background: #1ED760;
   color: #fff; }
   .btn-primary:hover {
     background: #0cb0dc; }

@@ -49,8 +49,12 @@ p {
 }
 
 a {
-  color: #00b8f9;
+  color: #FFF;
   text-decoration: none;
+  
+  &:hover {
+    color: #231f20;
+  }
 }
 
 .btn {
@@ -77,7 +81,7 @@ a {
 }
 
 .btn-primary {
-  background: #df258c;
+  background: #1ED760;
   color: #fff;
 
   &:hover {

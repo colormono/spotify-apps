@@ -26,7 +26,7 @@ class LoginButton extends Component {
 
   render() {
     return (
-      <button onClick={this.getAuthorization.bind(this)} className="btn">
+      <button onClick={this.getAuthorization.bind(this)} className="btn btn-primary">
         <i className='icon-spotify'></i> {this.props.title ? this.props.title : 'Entrar con Spotify'}
       </button>
     );

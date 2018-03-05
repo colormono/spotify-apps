@@ -11,6 +11,7 @@ import Callback from './components/Callback';
 import HomeScreen from './components/HomeScreen';
 import AnalizerScreen from './components/AnalizerScreen';
 import ResultScreen from './components/ResultScreen';
+import ProfileScreen from './components/ProfileScreen';
 
 // Styles
 import './styles/App.css';
@@ -33,6 +34,7 @@ class App extends Component {
               <Route path='/callback' component={Callback} />
               <Route path='/analizando' component={RequireAuth(AnalizerScreen)} />
               <Route path='/resultado' component={RequireAuth(ResultScreen)} />
+              <Route path='/perfil' component={RequireAuth(ProfileScreen)} />
             </section>
             <SocialButtons />
             <PoweredBy />
