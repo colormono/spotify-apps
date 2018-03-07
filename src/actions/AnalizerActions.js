@@ -5,7 +5,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import {
   FETCH_USER_TOP_TRACKS,
   FETCH_USER_TOP_ARTISTS,
-  SET_RECOMMENDATIONS_SEEDS,
+  SET_RECOMMENDATIONS,
   SET_USER_SCORE,
   SET_PLAYLIST_META,
   LOGOUT_USER
@@ -60,16 +60,18 @@ const calculateUserScore = (dispatch) => {
   };
   setUserScore(dispatch, score);
 
-  // Lógica de las 5 semillas para recomendaciones
-  // Por defecto, pasar IDs de tracks
-  let seeds = [
-    '0uuEqOyKlABOB7hzWKcEeG',
-    '0IHC4QGz0I4EdOGpGMRICA',
-    '3pMo77B4r1NwwIK78lO4xf',
-    '08QTzlvatmG99BuahclsPj',
-    '7LDUiraavMZ6mb8hK3mXkj'
-  ];
-  setRecommendationSeeds(dispatch, seeds);
+  // MÁXIMO 5 semillas para recomendaciones (si hay más no funciona!)
+  // https://developer.spotify.com/web-api/get-recommendations/
+  let recommendations = {
+    seed_tracks: [
+      '0uuEqOyKlABOB7hzWKcEeG',
+      '0IHC4QGz0I4EdOGpGMRICA',
+      '3pMo77B4r1NwwIK78lO4xf',
+      '08QTzlvatmG99BuahclsPj',
+      '7LDUiraavMZ6mb8hK3mXkj'
+    ]
+  };
+  setRecommendation(dispatch, recommendations);
 
   // Meta para la playlist
   let playlistMeta = {
@@ -87,9 +89,9 @@ const setUserScore = (dispatch, score) => {
   });
 }
 
-const setRecommendationSeeds = (dispatch, seeds) => {
+const setRecommendation = (dispatch, seeds) => {
   dispatch({
-    type: SET_RECOMMENDATIONS_SEEDS,
+    type: SET_RECOMMENDATIONS,
     payload: seeds
   });
 }

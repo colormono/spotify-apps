@@ -14,12 +14,12 @@ function trackEvent(network) {
 
 const SharingButtons = (props) => {
   return (
-    <div className="sharing">
+    <div className="sharing-buttons">
       <span>COMPARTIR</span>
       <FacebookShareButton url={props.shareUrl} onClick={() => trackEvent('facebook')}>
         <i className="icon icon-facebook"></i>
       </FacebookShareButton>
-      <TwitterShareButton url='http://miseriehbo.com' title={'¡Mi serie HBO es ' + props.serie + '! ¿Quieres conocer cuál es la tuya? Haz clic y descúbrelo. '} hashtags={['HBOGOLA', 'HBOLAT']} onClick={() => trackEvent('twitter')}>
+      <TwitterShareButton url={props.shareUrl} tweet={props.tweet} hashtags={props.hashtags} onClick={() => trackEvent('twitter')}>
         <i className="icon icon-twitter"></i>
       </TwitterShareButton>
     </div>

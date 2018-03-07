@@ -5,16 +5,11 @@ import ReactGA from 'react-ga';
 import MDSpinner from 'react-md-spinner';
 import { createCustomPlaylist } from '../actions';
 import { Header, SharingButtons, Playlist } from './common';
+import Replay from './Replay';
 
 class ResultScreen extends Component {
-  state = {
-    createNewPlaylist: true
-  }
-
   componentWillMount() {
-    if (this.state.createNewPlaylist) {
-      this.props.createCustomPlaylist();
-    }
+    //this.props.createCustomPlaylist();
   }
 
   renderPlaylist() {
@@ -50,10 +45,10 @@ class ResultScreen extends Component {
         <section className="section-resultado">
 
           <hgroup className="resultado-header">
-            <h2>MARATÓN MUSICAL</h2>
+            <h2>TITULO CTA</h2>
             <p>Reprehenderit dignissimos ut. Qui qui magnam omnis dolorem occaecati architecto labore non repellendus. Aliquid labore nemo sit accusantium.</p>
             <button onClick={this.onCtaButtonPress.bind(this)} className="btn btn-primary">
-              CONOCÉ NIKE REACT
+              BOTÓN CTA
             </button>
           </hgroup>
 
@@ -62,7 +57,11 @@ class ResultScreen extends Component {
           </article>
 
           <aside className="resultado-share">
-            <SharingButtons shareUrl={`${this.props.baseUri}/share.html`} />
+            <SharingButtons shareUrl={`${this.props.baseUri}/share.html`} tweet="Ya tengo mi playlist de XXX!" hashtags={['brand', 'playlist', 'music']} />
+          </aside>
+
+          <aside className="resultado-replay">
+            <Replay />
           </aside>
 
         </section>

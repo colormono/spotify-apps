@@ -2,13 +2,14 @@ import {
   FETCH_USER_TOP_TRACKS,
   FETCH_USER_TOP_ARTISTS,
   SET_USER_SCORE,
-  SET_RECOMMENDATIONS_SEEDS
+  SET_RECOMMENDATIONS,
+  SET_RECOMMENDATIONS_WITH_SEEDS
 } from '../actions/types';
 
 const INITIAL_STATE = {
   topArtists: null,
   topTracks: null,
-  seeds: [],
+  recommendations: {},
   score: {}
 }
 
@@ -21,8 +22,11 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_USER_TOP_TRACKS:
       return { ...state, topTracks: action.payload };
 
-    case SET_RECOMMENDATIONS_SEEDS:
-      return { ...state, seeds: action.payload }
+    case SET_RECOMMENDATIONS:
+      return { ...state, recommendations: action.payload }
+
+    case SET_RECOMMENDATIONS_WITH_SEEDS:
+      return { ...state, recommendations: action.payload }
 
     case SET_USER_SCORE:
       return { ...state, score: action.payload }

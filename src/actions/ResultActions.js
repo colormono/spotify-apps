@@ -1,63 +1,70 @@
 import SpotifyWebApi from 'spotify-web-api-js';
 import axios from 'axios';
+import { store } from '../index';
 
 import {
   CREATE_CUSTOM_PLAYLIST,
-  CREATE_CUSTOM_PLAYLIST_SUCCESS
+  CREATE_CUSTOM_PLAYLIST_SUCCESS,
+  SET_RECOMMENDATIONS_WITH_SEEDS,
+  LOGOUT_USER
 } from './types';
 
 export const createCustomPlaylist = () => {
   return (dispatch, getState) => {
-    const state = getState();
-    const token = state.auth.accessToken;
-
-    // Playlist data
-    const userId = state.auth.user.id;
-    const playlistMeta = state.result.playlist.meta;
-    let playlistTracks = [];
-    let playlistId = '';
-
-    // [ loader ;) ]
-    dispatch({
-      type: CREATE_CUSTOM_PLAYLIST
-    });
-
-    // Instancia de Spotify Web API
-    // Docs: https://doxdox.org/jmperez/spotify-web-api-js
-    const s = new SpotifyWebApi();
-    s.setAccessToken(token);
-
-    // Tipo de semillas (por defecto generos)
-    // https://developer.spotify.com/web-api/get-recommendations/
-    let seeds = state.analizer.seeds.slice(0, 4);
-
-    // Pedir recomendaciones
-    s.getRecommendations({ seed_tracks: seeds })
-      .then((response) => {
-        response.tracks.map((track, index) => playlistTracks.push("spotify:track:" + track.id));
-        return playlistTracks;
-      })
-      .then((response) => {
-        playlistTracks = response;
-        return newPlaylist(s, userId, playlistMeta)
-      })
-      .then((response) => {
-        playlistId = response;
-        return addTracks(s, userId, playlistId, playlistTracks)
-      })
-      .then(() => addCover(token, userId, playlistId, playlistMeta.cover))
-      .then(() => {
-        const playlist = {
-          user: userId,
-          id: playlistId
-        }
-
-        return dispatch({
-          type: CREATE_CUSTOM_PLAYLIST_SUCCESS,
-          payload: playlist
-        });
-      });
+    dispatch({ type: CREATE_CUSTOM_PLAYLIST });
+    dispatch(create());
   };
+}
+
+export const createCustomPlaylistWithSeeds = (seeds) => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: SET_RECOMMENDATIONS_WITH_SEEDS,
+      payload: seeds
+    });
+    dispatch({ type: CREATE_CUSTOM_PLAYLIST });
+    dispatch(create());
+  }
+}
+
+// Create Playlist
+const create = () => {
+  const state = store.getState();
+  const token = state.auth.accessToken;
+
+  // Playlist data
+  const recommendations = state.analizer.recommendations;
+  const userId = state.auth.user.id;
+  const playlistMeta = state.result.playlist.meta;
+  let playlistTracks = [];
+  let playlistId = '';
+
+  // Instancia de Spotify Web API
+  // Docs: https://doxdox.org/jmperez/spotify-web-api-js
+  const s = new SpotifyWebApi();
+  s.setAccessToken(token);
+
+  // Pedir recomendaciones
+  return s.getRecommendations(recommendations)
+    .then(response => {
+      response.tracks.map((track, index) => playlistTracks.push("spotify:track:" + track.id));
+      return playlistTracks;
+    })
+    .then(response => playlistTracks = response)
+    .then(() => newPlaylist(s, userId, playlistMeta))
+    .then(response => playlistId = response)
+    .then(() => addTracks(s, userId, playlistId, playlistTracks))
+    .then(() => addCover(token, userId, playlistId, playlistMeta.cover))
+    .then(() => {
+      const playlist = {
+        user: userId,
+        id: playlistId
+      }
+      return { type: CREATE_CUSTOM_PLAYLIST_SUCCESS, payload: playlist };
+    })
+    .catch(() => {
+      return { type: LOGOUT_USER };
+    });
 }
 
 // Nueva playlist
