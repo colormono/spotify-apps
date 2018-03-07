@@ -1,11 +1,10 @@
 import {
-  FETCH_RECOMMENDATIONS,
   SET_PLAYLIST_META,
-  CREATE_CUSTOM_PLAYLIST
+  CREATE_CUSTOM_PLAYLIST,
+  CREATE_CUSTOM_PLAYLIST_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  recommendations: {},
   playlist: {
     loading: true,
     user: '',
@@ -27,16 +26,18 @@ export default (state = INITIAL_STATE, action) => {
         playlist: { ...state.playlist, meta: action.payload }
       };
 
-    case FETCH_RECOMMENDATIONS:
+    case CREATE_CUSTOM_PLAYLIST:
       return {
         ...state,
-        recommendations: action.payload,
         playlist: {
+          ...state.playlist,
+          id: '',
+          user: '',
           loading: true
         }
       };
 
-    case CREATE_CUSTOM_PLAYLIST:
+    case CREATE_CUSTOM_PLAYLIST_SUCCESS:
       return {
         ...state,
         playlist: {

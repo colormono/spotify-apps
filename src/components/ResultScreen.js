@@ -13,7 +13,7 @@ class ResultScreen extends Component {
 
   componentWillMount() {
     if (this.state.createNewPlaylist) {
-      //this.props.createCustomPlaylist();
+      this.props.createCustomPlaylist();
     }
   }
 

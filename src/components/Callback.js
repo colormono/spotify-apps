@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions';
 
 class Callback extends Component {
+  state = {
+    anyToken: false
+  };
+
   componentWillMount() {
 
     // Obtener parametros de la url
@@ -17,34 +21,33 @@ class Callback extends Component {
       return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    // Control de errores
-    var error = getParameterByName('error');
-    if (error) {
-      this.props.loginUser()
-    }
-
     // Token de sesión
     var token = getParameterByName('access_token');
     if (token) {
+      this.setState({ anyToken: true });
       this.props.loginUser({ token })
+    } else {
+      this.props.loginUser(false)
     }
+
   }
 
   render() {
-    const { accessToken } = this.props;
+    const { accessToken, errors } = this.props;
+    console.log(errors);
 
-    // Autorizando
-    if (!accessToken) {
-      return (
-        <div>Autorizando...</div>
-      )
-    }
     // Error de autorización
-    else if (accessToken === 'ERROR') {
+    if (!this.state.anyToken && errors !== '') {
       return (
         <Redirect to="/" />
       )
     }
+
+    // Autorizando
+    if (!accessToken) {
+      return <div>Autorizando...</div>
+    }
+
     // Autorización exitosa
     return (
       <Redirect to={`${process.env.PUBLIC_URL}/analizando`} />
@@ -54,7 +57,8 @@ class Callback extends Component {
 
 function mapStateToProps(state) {
   return {
-    accessToken: state.auth.accessToken
+    accessToken: state.auth.accessToken,
+    errors: state.auth.error
   };
 }
 

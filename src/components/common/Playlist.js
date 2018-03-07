@@ -21,7 +21,7 @@ class Playlist extends Component {
           frameBorder="0"
           title="SpotifyIframe"
         />
-        <button onClick={this.onButtonPress.bind(this)} className="btn btn-small btn-white">
+        <button onClick={() => this.onButtonPress()} className="btn btn-small btn-white">
           <i className='icon-spotify'></i> ESCUCHAR EN SPOTIFY
         </button>
       </div>

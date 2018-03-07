@@ -1,6 +1,6 @@
 // Docs: https://doxdox.org/jmperez/spotify-web-api-js
 import SpotifyWebApi from 'spotify-web-api-js';
-import { store } from '../index';
+//import { store } from '../index';
 
 import {
   FETCH_USER_TOP_TRACKS,
@@ -51,8 +51,7 @@ export const fetchUserTopTracks = () => {
 // Ideas? https://developer.spotify.com/web-api/get-recommendations/
 
 const calculateUserScore = (dispatch) => {
-  const state = store.getState().analizer;
-  console.log(state);
+  //const state = store.getState().analizer;
 
   // Lógica del score
   let score = {
