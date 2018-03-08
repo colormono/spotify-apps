@@ -4,11 +4,7 @@ import ReactGA from 'react-ga';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { VideoPlayer } from './common';
-import {
-  fetchUserInfo,
-  fetchUserTopArtists,
-  fetchUserTopTracks
-} from '../actions';
+import { analizeUserProfile } from '../actions';
 
 class Analizer extends Component {
   state = {
@@ -16,9 +12,7 @@ class Analizer extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchUserInfo();
-    this.props.fetchUserTopArtists();
-    this.props.fetchUserTopTracks();
+    this.props.analizeUserProfile();
   }
 
   componentDidMount() {
@@ -36,7 +30,7 @@ class Analizer extends Component {
   renderButton() {
     if (this.state.showButton) {
       return (
-        <Link to={`${process.env.PUBLIC_URL}/resultado`} onClick={this.onButtonPress()}>
+        <Link to={`${process.env.PUBLIC_URL}/resultado`} onClick={this.onButtonPress.bind(this)}>
           <button className="btn btn-small btn-primary">CONTINUAR</button>
         </Link>
       );
@@ -58,8 +52,4 @@ class Analizer extends Component {
   }
 }
 
-export default withRouter(connect(null, {
-  fetchUserInfo,
-  fetchUserTopArtists,
-  fetchUserTopTracks
-})(Analizer));
+export default withRouter(connect(null, { analizeUserProfile })(Analizer));

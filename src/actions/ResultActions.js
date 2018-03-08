@@ -1,3 +1,4 @@
+// Docs: https://doxdox.org/jmperez/spotify-web-api-js
 import SpotifyWebApi from 'spotify-web-api-js';
 import axios from 'axios';
 import { store } from '../index';
@@ -40,7 +41,6 @@ const create = () => {
   let playlistId = '';
 
   // Instancia de Spotify Web API
-  // Docs: https://doxdox.org/jmperez/spotify-web-api-js
   const s = new SpotifyWebApi();
   s.setAccessToken(token);
 

@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import MDSpinner from 'react-md-spinner';
 import { createCustomPlaylist } from '../actions';
 import { Header, SharingButtons, Playlist } from './common';
+import Poster from './Poster';
 import Replay from './Replay';
 
 class ResultScreen extends Component {
@@ -61,6 +62,14 @@ class ResultScreen extends Component {
           </aside>
 
           <aside className="resultado-replay">
+            <h4>Resultado</h4>
+            {this.props.score.map((item) => {
+              const { average, name } = item;
+              return (
+                <p key={name}>{name} | {average}%</p>
+              );
+            })}
+            <Poster genre='rock' name='Francisco' />
             <Replay />
           </aside>
 
@@ -73,7 +82,8 @@ class ResultScreen extends Component {
 function mapStateToProps(state) {
   return {
     baseUri: state.config.baseUri,
-    playlist: state.result.playlist
+    playlist: state.result.playlist,
+    score: state.analizer.score
   }
 }
 

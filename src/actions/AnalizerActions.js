@@ -1,104 +1,187 @@
-// Docs: https://doxdox.org/jmperez/spotify-web-api-js
+// Ideas para la mecánica? https://developer.spotify.com/web-api/get-recommendations/
+// API Docs: https://doxdox.org/jmperez/spotify-web-api-js
 import SpotifyWebApi from 'spotify-web-api-js';
-//import { store } from '../index';
+import { store } from '../index';
 
 import {
-  FETCH_USER_TOP_TRACKS,
-  FETCH_USER_TOP_ARTISTS,
+  SET_USER_INFO,
+  SET_USER_RECENTLY_PLAYED,
+  SET_USER_TOP_ARTISTS,
   SET_RECOMMENDATIONS,
   SET_USER_SCORE,
   SET_PLAYLIST_META,
   LOGOUT_USER
 } from './types';
 
-export const fetchUserTopArtists = () => {
+export const analizeUserProfile = () => {
   return (dispatch, getState) => {
-    const state = getState();
+    const state = store.getState();
+    const token = state.auth.accessToken;
+
+    // Instancia de Spotify Web API
     const s = new SpotifyWebApi();
-    s.setAccessToken(state.auth.accessToken);
-    s.getMyTopArtists({ limit: 10 })
-      .then(
-        response => dispatch({
-          type: FETCH_USER_TOP_ARTISTS,
-          payload: response.items
-        })
-      );
-  };
+    s.setAccessToken(token);
+
+    // Analizar usuario
+    s.getMe()
+      .then(response => dispatch(setUserInfo(response)))
+      .then(() => dispatch(fetchUserRecentlyPlayed(s)))
+      .then(() => dispatch(fetchUserTopArtists(s)))
+      .then(response => dispatch(getGenreScore(response.payload)))
+      .then(response => dispatch(setRecommendation(response.payload)))
+      .then(() => dispatch(setPlaylistMeta()))
+      .catch(() => dispatch({ type: LOGOUT_USER }));
+  }
 }
 
-export const fetchUserTopTracks = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    const s = new SpotifyWebApi();
-    s.setAccessToken(state.auth.accessToken);
-    s.getMyTopTracks({ limit: 10 })
-      .then(
-        response => dispatch({
-          type: FETCH_USER_TOP_TRACKS,
-          payload: response.items
-        })
-      )
+// Guardar datos del usuario
+const setUserInfo = (user) => {
+  return {
+    type: SET_USER_INFO,
+    payload: user
+  };
+};
 
-      // EJECUTAR LA MECÁNICA
-      .then(() => { calculateUserScore(dispatch) })
-      .catch(() => {
-        dispatch({ type: LOGOUT_USER })
+// Obtener últimos 20 temas escuchados
+const fetchUserRecentlyPlayed = (s) => {
+  return s.getMyRecentlyPlayedTracks()
+    .then(response => {
+      return {
+        type: SET_USER_RECENTLY_PLAYED,
+        payload: response.items
+      }
+    });
+}
+
+// Obtener artistas preferidos
+const fetchUserTopArtists = (s) => {
+  return s.getMyTopArtists()
+    .then(response => {
+      return {
+        type: SET_USER_TOP_ARTISTS,
+        payload: response.items
+      }
+    });
+}
+
+// Calcular generos más escuchados (requiere artistas)
+const getGenreScore = (artistas) => {
+  const state = store.getState();
+  const generosMecanica = state.genres;
+  let scores = [];
+
+  // Generos de la mecánica
+  generosMecanica.map((genre) => {
+    return scores.push({
+      name: genre.name,
+      score: 0,
+      seeds: {
+        seeds_genres: genre.seeds_genres,
+        seed_artists: [],
+      }
+    });
+  });
+
+  // Seeds Artistas
+  generosMecanica.forEach((generoMecanica, index) => {
+    artistas.forEach((artista) => {
+      artista.genres.forEach((genre) => {
+        if (generoMecanica.subgenres.includes(genre)) {
+          const seeds = scores[index].seeds.seed_artists;
+          if (!seeds.includes(artista.id)) {
+            seeds.push(artista.id);
+          }
+        }
       });
-  };
+    })
+  });
+
+  // Generos artistas
+  let generosArtistas = [];
+  artistas.forEach((artista) => {
+    return artista.genres.forEach((genre) => {
+      return generosArtistas.push(genre);
+    })
+  });
+
+  // Para cada genero de los artistas
+  // si existe como subgenero de los "generos de la mecanica"
+  // incrementar score para el genero principal
+  generosArtistas.forEach((generoArtista) => {
+    return generosMecanica.forEach((generoMecanica, index) => {
+      return generoMecanica.subgenres.find((subgenero) => {
+        if (subgenero === generoArtista) {
+          return scores[index].score += 1;
+        };
+        return false;
+      })
+    })
+  });
+
+  // Ordenar generos por score
+  scores.sort((a, b) => {
+    let keyA = new Date(a.score),
+      keyB = new Date(b.score);
+    if (keyA > keyB) return -1;
+    if (keyA < keyB) return 1;
+    return 0;
+  });
+
+  // Recortar los primeros 4 generos
+  let maxScores = scores.slice(0, 4);
+
+  // Sacar promedio
+  const totalScore = maxScores.reduce((sum, genre) => sum + genre.score, 0);
+  let restoScore = 100;
+  for (let i = 0; i < 3; i++) {
+    let average = Math.ceil(maxScores[i].score * 100 / totalScore);
+    restoScore -= average;
+    maxScores[i].average = average;
+  }
+  maxScores[3].average = restoScore;
+
+  // Disptach
+  return {
+    type: SET_USER_SCORE,
+    payload: maxScores
+  }
 }
 
-// MECANICA
-// Ideas? https://developer.spotify.com/web-api/get-recommendations/
+// MÁXIMO 5 semillas para recomendaciones (si hay más no funciona!)
+// https://developer.spotify.com/web-api/get-recommendations/
+const setRecommendation = (scores) => {
+  const seedsArtists = scores.map((score) => {
+    return score.seeds.seed_artists[0];
+  });
 
-const calculateUserScore = (dispatch) => {
-  //const state = store.getState().analizer;
-
-  // Lógica del score
-  let score = {
-    energia: 100,
-    generos: ['rock', 'pop', 'reggae']
+  const seeds = {
+    seed_artists: seedsArtists
   };
-  setUserScore(dispatch, score);
+  console.log(seeds);
 
-  // MÁXIMO 5 semillas para recomendaciones (si hay más no funciona!)
-  // https://developer.spotify.com/web-api/get-recommendations/
-  let recommendations = {
-    seed_tracks: [
-      '0uuEqOyKlABOB7hzWKcEeG',
-      '0IHC4QGz0I4EdOGpGMRICA',
-      '3pMo77B4r1NwwIK78lO4xf',
-      '08QTzlvatmG99BuahclsPj',
-      '7LDUiraavMZ6mb8hK3mXkj'
-    ]
-  };
-  setRecommendation(dispatch, recommendations);
+  return {
+    type: SET_RECOMMENDATIONS,
+    payload: seeds
+  }
+}
 
+const setPlaylistMeta = () => {
   // Meta para la playlist
   let playlistMeta = {
     title: 'SocialSnack',
     description: 'Una playlist que te hará vibrar.',
     cover: 'http://miseriehbo.com/images/cover-ballers.jpg'
   };
-  setPlaylistMeta(dispatch, playlistMeta);
-}
 
-const setUserScore = (dispatch, score) => {
-  dispatch({
-    type: SET_USER_SCORE,
-    payload: score
-  });
-}
-
-const setRecommendation = (dispatch, seeds) => {
-  dispatch({
-    type: SET_RECOMMENDATIONS,
-    payload: seeds
-  });
-}
-
-const setPlaylistMeta = (dispatch, playlistMeta) => {
-  dispatch({
+  return {
     type: SET_PLAYLIST_META,
     payload: playlistMeta
-  });
+  }
 }
+
+// const analizerSuccess = () => {
+//   return {
+//     type: SET_PLAYLIST_META,
+//     payload: playlistMeta
+//   }
+// }

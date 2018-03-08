@@ -1,6 +1,7 @@
 import {
-  FETCH_USER_TOP_TRACKS,
-  FETCH_USER_TOP_ARTISTS,
+  SET_USER_RECENTLY_PLAYED,
+  SET_USER_TOP_TRACKS,
+  SET_USER_TOP_ARTISTS,
   SET_USER_SCORE,
   SET_RECOMMENDATIONS,
   SET_RECOMMENDATIONS_WITH_SEEDS
@@ -9,6 +10,7 @@ import {
 const INITIAL_STATE = {
   topArtists: null,
   topTracks: null,
+  recentlyPlayed: null,
   recommendations: {},
   score: {}
 }
@@ -16,11 +18,14 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
-    case FETCH_USER_TOP_ARTISTS:
+    case SET_USER_TOP_ARTISTS:
       return { ...state, topArtists: action.payload };
 
-    case FETCH_USER_TOP_TRACKS:
+    case SET_USER_TOP_TRACKS:
       return { ...state, topTracks: action.payload };
+
+    case SET_USER_RECENTLY_PLAYED:
+      return { ...state, recentlyPlayed: action.payload };
 
     case SET_RECOMMENDATIONS:
       return { ...state, recommendations: action.payload }

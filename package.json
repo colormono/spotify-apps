@@ -13,6 +13,7 @@
     "react-dom": "^16.0.0",
     "react-ga": "^2.3.5",
     "react-md-spinner": "^0.2.5",
+    "react-pixi-fiber": "^0.4.0",
     "react-player": "^0.25.3",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",

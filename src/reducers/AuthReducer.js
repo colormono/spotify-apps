@@ -3,7 +3,7 @@ import {
   LOGOUT_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  FETCH_USER_INFO
+  SET_USER_INFO
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -40,7 +40,7 @@ export default (state = INITIAL_STATE, action) => {
         userLogin: false
       };
 
-    case FETCH_USER_INFO:
+    case SET_USER_INFO:
       return { ...state, user: action.payload }
 
     default:
