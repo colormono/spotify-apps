@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { LoginButton } from './common';
+import { ButtonLogin } from './common';
 
 import logo from '../images/logo.png';
 
@@ -15,7 +15,7 @@ class HomeScreen extends Component {
 
         <hgroup>
           <h2>Descubre qué fan de ******* eres y participa por *******.</h2>
-          <LoginButton title="Entrar con Spotify" />
+          <ButtonLogin title="Entrar con Spotify" />
         </hgroup>
 
       </section>

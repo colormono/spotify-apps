@@ -18,7 +18,6 @@ class Analyzer extends Component {
 
   componentDidMount() {
     if (this.props.analyzed) {
-      console.log(this.props.analyzed);
       _.delay(() => this.setState({ canContinue: true }), 5000);
     }
   }

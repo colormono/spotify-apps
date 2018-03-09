@@ -36,8 +36,10 @@ class App extends Component {
               <Route path='/resultado' component={RequireAuth(ResultScreen)} />
               <Route path='/perfil' component={RequireAuth(ProfileScreen)} />
             </section>
-            <SocialButtons />
-            <PoweredBy />
+            <footer className="footer">
+              <SocialButtons />
+              <PoweredBy />
+            </footer>
           </div>
         </Router>
       </div>

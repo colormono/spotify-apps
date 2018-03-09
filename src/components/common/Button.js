@@ -1,8 +1,27 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 
-const Button = () => {
+function onButtonPress(ga, url) {
+  if (ga) {
+    ReactGA.event({
+      category: 'Clicks',
+      action: 'Click',
+      label: ga
+    });
+  }
+
+  if (url) {
+    window.open(url, '_blank');
+  }
+};
+
+const Button = (props) => {
+  const { ga, url } = props;
+
   return (
-    <div>Button</div>
+    <button onClick={() => onButtonPress(ga, url)} className={`${props.className}`}>
+      {props.children}
+    </button>
   );
 };
 

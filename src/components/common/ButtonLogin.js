@@ -6,7 +6,7 @@ import {
   SPOTIFY_SCOPES
 } from '../../config';
 
-class LoginButton extends Component {
+class ButtonLogin extends Component {
   getAuthorization() {
 
     // Track
@@ -37,4 +37,4 @@ class LoginButton extends Component {
   }
 }
 
-export { LoginButton };
+export { ButtonLogin };

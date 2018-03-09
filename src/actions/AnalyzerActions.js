@@ -20,7 +20,7 @@ export const analyzeUserProfile = () => {
   return (dispatch, getState) => {
     const state = store.getState();
     const token = state.auth.accessToken;
-    dispatch(analizerStart());
+    dispatch(analyzerStart());
 
     // Instancia de Spotify Web API
     const s = new SpotifyWebApi();
@@ -34,18 +34,18 @@ export const analyzeUserProfile = () => {
       .then(response => dispatch(getGenreScore(response.payload)))
       .then(response => dispatch(setRecommendation(response.payload)))
       .then(() => dispatch(setPlaylistMeta()))
-      .then(() => dispatch(analizerSuccess()))
+      .then(() => dispatch(analyzerSuccess()))
       .catch(() => dispatch({ type: LOGOUT_USER }));
   }
 }
 
-const analizerStart = () => {
+const analyzerStart = () => {
   return {
     type: ANALYZER_START
   }
 }
 
-const analizerSuccess = () => {
+const analyzerSuccess = () => {
   return {
     type: ANALYZER_SUCCESS
   }
@@ -174,7 +174,6 @@ const setRecommendation = (scores) => {
   const seeds = {
     seed_artists: seedsArtists
   };
-  console.log(seeds);
 
   return {
     type: SET_RECOMMENDATIONS,
@@ -183,7 +182,6 @@ const setRecommendation = (scores) => {
 }
 
 const setPlaylistMeta = () => {
-  // Meta para la playlist
   let playlistMeta = {
     title: 'SocialSnack',
     description: 'Una playlist que te hará vibrar.',
@@ -195,10 +193,3 @@ const setPlaylistMeta = () => {
     payload: playlistMeta
   }
 }
-
-// const analyzerSuccess = () => {
-//   return {
-//     type: SET_PLAYLIST_META,
-//     payload: playlistMeta
-//   }
-// }

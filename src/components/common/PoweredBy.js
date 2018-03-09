@@ -4,12 +4,12 @@ import logo from '../../images/logo-spotify-white.png';
 class PoweredBy extends Component {
   render() {
     return (
-      <footer className="footer">
+      <div className='poweredBy'>
         <small>POWERED BY</small>
         <span>
-          <img src={logo} alt="Spotify" />
+          <img src={logo} alt='Spotify' />
         </span>
-      </footer>
+      </div>
     );
   }
 }

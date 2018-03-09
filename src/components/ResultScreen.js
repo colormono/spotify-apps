@@ -1,92 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ReactGA from 'react-ga';
-import MDSpinner from 'react-md-spinner';
+import { APP_ROOT } from '../config';
 import { createCustomPlaylist } from '../actions';
-import { Header, SharingButtons, Playlist } from './common';
+import { Button, SharingButtons, Playlist } from './common';
 import Poster from './Poster';
-import Replay from './Replay';
+import UserScore from './UserScore';
 
 class ResultScreen extends Component {
   componentWillMount() {
     //this.props.createCustomPlaylist();
   }
 
-  renderPlaylist() {
-    const { id, user, loading } = this.props.playlist;
-    if (!loading) {
-      return <Playlist user={user} id={id} />
-    }
-
-    return (
-      <div className="spinner">
-        <MDSpinner
-          size={48}
-          singleColor="rgb(223,37,140)"
-        />
-      </div>
-    );
-  }
-
-  onCtaButtonPress() {
-    ReactGA.event({
-      category: 'Clicks',
-      action: 'Click',
-      label: 'CTA Click'
-    });
-    window.open('https://www.nike.com/ar/es_la/c/innovation/react', '_blank');
-  };
-
   render() {
+    const { id, user, loading } = this.props.playlist;
+
     return (
-      <div>
-        <Header />
+      <section className='section-resultado'>
 
-        <section className="section-resultado">
-
-          <hgroup className="resultado-header">
+        <hgroup className='resultado-header'>
+          <Button ga='CTA Click' url='https://www.nike.com/ar/es_la/c/innovation/react'>
             <h2>TITULO CTA</h2>
             <p>Reprehenderit dignissimos ut. Qui qui magnam omnis dolorem occaecati architecto labore non repellendus. Aliquid labore nemo sit accusantium.</p>
-            <button onClick={this.onCtaButtonPress.bind(this)} className="btn btn-primary">
-              BOTÓN CTA
-            </button>
-          </hgroup>
+            <span className='btn btn-primary'>BOTÓN CTA</span>
+          </Button>
+        </hgroup>
 
-          <article className="resultado-playlist">
-            {this.renderPlaylist()}
-          </article>
+        <article className='resultado-playlist'>
+          <Playlist user={user} id={id} loading={loading} />
+        </article>
 
-          <aside className="resultado-share">
-            <SharingButtons shareUrl={`${this.props.baseUri}/share.html`} tweet="Ya tengo mi playlist de XXX!" hashtags={['brand', 'playlist', 'music']} />
-          </aside>
+        <aside className='resultado-share'>
+          <SharingButtons shareUrl={`${APP_ROOT}/share.html`} tweet='Ya tengo mi playlist de XXX!' hashtags={['brand', 'playlist', 'music']} />
+        </aside>
 
-          <aside className="resultado-replay">
-            <h4>Resultado</h4>
-            {this.props.score.map((item) => {
-              const { average, name } = item;
-              return (
-                <p key={name}>{name} | {average}%</p>
-              );
-            })}
-            <Poster genre='rock' name='Francisco' />
-            <Replay />
-          </aside>
+        <aside className='resultado-score'>
+          <UserScore />
+          <Poster genre='rock' name={user} />
+        </aside>
 
-        </section>
-      </div>
+      </section>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    baseUri: state.config.baseUri,
-    playlist: state.result.playlist,
-    score: state.analyzer.score
+    playlist: state.result.playlist
   }
 }
 
-export default withRouter(connect(mapStateToProps, {
-  createCustomPlaylist
-})(ResultScreen));
+export default withRouter(connect(mapStateToProps, { createCustomPlaylist })(ResultScreen));

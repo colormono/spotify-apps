@@ -98,7 +98,7 @@ const addCover = (token, userId, playlistId, playlistCover) => {
       },
       data: encodedCover
     }).catch((error) => {
-      console.log(error)
+      console.log('No se pudo subir el cover.')
     });
   });
 }
