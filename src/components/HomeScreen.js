@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { LoginButton } from './common';
 
@@ -16,7 +15,7 @@ class HomeScreen extends Component {
 
         <hgroup>
           <h2>Descubre qué fan de ******* eres y participa por *******.</h2>
-          <LoginButton title="Entrar con Spotify" config={this.props.config} />
+          <LoginButton title="Entrar con Spotify" />
         </hgroup>
 
       </section>
@@ -24,10 +23,4 @@ class HomeScreen extends Component {
   };
 };
 
-function mapStateToProps(state) {
-  return {
-    config: state.config
-  };
-}
-
-export default withRouter(connect(mapStateToProps)(HomeScreen));
+export default withRouter(HomeScreen);

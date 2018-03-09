@@ -2,13 +2,14 @@
   "name": "spotify-app",
   "version": "0.1.0",
   "private": true,
-  "-homepage": "http://colormono.com/",
+  "homepage": "http://colormono.com/",
   "dependencies": {
     "axios": "^0.17.0",
     "gsap": "^1.20.3",
     "lodash": "^4.17.4",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.2",
+    "pixi.js": "^4.7.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-ga": "^2.3.5",
@@ -35,6 +36,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "NODE_PATH=src:src/components react-scripts build",
     "build": "npm-run-all build-css build-js",
+    "build-sandbox": "PUBLIC_URL=https://socialsnacksandbox.com/spotify-test npm-run-all build-css build-js",
     "test": "NODE_PATH=src:src/components react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

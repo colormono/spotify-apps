@@ -1,44 +1,38 @@
 # [Cliente] Spotify Ad
 Sitio estático que se conecta con la API de Spotify.
 
+Este proyecto fue creado con [Create React App](https://github.com/facebookincubator/create-react-app).
+
+Se puede encontrar toda la documentación [acá](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
 __Tecnologías__
 * [Node](https://nodejs.org/) - Servidor local
-* [React](https://reactjs.org/) - Manejo del DOM
-* [Redux](http://redux.js.org/) - Manejo de DATOS
+* [React](https://reactjs.org/) - Control del DOM
+* [Redux](http://redux.js.org/) - Control de DATOS
 * [Webpack](http://webpack.js.org/) - Compilador
 
 
 ## Puesta en marcha
-
-Este proyecto fue creado con [Create React App](https://github.com/facebookincubator/create-react-app).
-
-
-Se puede encontrar toda la documentación [acá](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
-
-### Configuración
 * Clonar el repo
 * Acceder desde la terminal al directorio
 * Instalar dependencias con `npm install`
-* [Scripts disponibles](#available-scripts)
-  * [npm start](#npm-start) - Correr mientras se desarrolla
-  * [npm test](#npm-test)
-  * [npm run build](#npm-run-build) - Correr para compilar la versión para distribución
-  * [npm run eject](#npm-run-eject)
+* Correr [script disponibles](#available-scripts)
+  * [npm start](#npm-start) - Comenzar a desarrollar
+  * [npm test](#npm-test) - Correr tests
+  * [npm run build-sandbox](#npm-run-build) - Crear distribución para sandbox
+  * [npm run build](#npm-run-build) - Crear distribución para productivo
 
-### Actualizar datos de conexión
-Desde `src/config.js` actualizar_
-- __ID de Cliente__
-- __URL para redirección__
-- __scopes__ requeridos
+
+### Configuración
+- Ajustar las URLs y datos de la apliación de Spotify en `config.js`
+- En `package.json` ajustar la variable __PUBLIC_URL__ de la tarea __build-sandbox__ con la ruta de sandbox.
+
 
 ### Base de datos
 - No aplica por el momento
 
 
 ## Deployment
-- Revisar que los paths de `config.js` estén correctamente apuntados
-- Desde `package.json` actualizar __hompage__
 - Si se hostea en un servidor Apache, el `.htaccess` es este:
 ```
 <IfModule mod_rewrite.c>
@@ -55,7 +49,7 @@ Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
 Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
 ```
 
-## Links utiles
+## Links útiles
 
 ### Autentificación & Spotify
 * [Guía de Autorización](https://developer.spotify.com/web-api/authorization-guide/#authorization-code-flow)

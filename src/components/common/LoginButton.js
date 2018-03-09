@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import ReactGA from 'react-ga';
+import {
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_REDIRECT_URI,
+  SPOTIFY_SCOPES
+} from '../../config';
 
 class LoginButton extends Component {
   getAuthorization() {
-    const { clientId, redirectUri, scopes } = this.props.config;
 
     // Track
     ReactGA.event({
@@ -14,9 +18,9 @@ class LoginButton extends Component {
 
     // Crear URL
     let url =
-      'https://accounts.spotify.com/authorize?client_id=' + clientId
-      + '&redirect_uri=' + encodeURIComponent(redirectUri)
-      + '&scope=' + encodeURIComponent(scopes.join(' '))
+      'https://accounts.spotify.com/authorize?client_id=' + SPOTIFY_CLIENT_ID
+      + '&redirect_uri=' + encodeURIComponent(SPOTIFY_REDIRECT_URI)
+      + '&scope=' + encodeURIComponent(SPOTIFY_SCOPES.join(' '))
       + '&response_type=token'
       + '&show_dialog=true';
 

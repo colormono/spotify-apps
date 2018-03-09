@@ -1,6 +1,7 @@
 // Ideas para la mecánica? https://developer.spotify.com/web-api/get-recommendations/
 // API Docs: https://doxdox.org/jmperez/spotify-web-api-js
 import SpotifyWebApi from 'spotify-web-api-js';
+import { APP_ROOT } from '../config';
 import { store } from '../index';
 
 import {
@@ -76,7 +77,7 @@ const getGenreScore = (artistas) => {
       name: genre.name,
       score: 0,
       seeds: {
-        seeds_genres: genre.seeds_genres,
+        seed_genres: genre.seed_genres,
         seed_artists: [],
       }
     });
@@ -134,7 +135,7 @@ const getGenreScore = (artistas) => {
   const totalScore = maxScores.reduce((sum, genre) => sum + genre.score, 0);
   let restoScore = 100;
   for (let i = 0; i < 3; i++) {
-    let average = Math.ceil(maxScores[i].score * 100 / totalScore);
+    let average = Math.floor(maxScores[i].score * 100 / totalScore);
     restoScore -= average;
     maxScores[i].average = average;
   }
@@ -170,7 +171,7 @@ const setPlaylistMeta = () => {
   let playlistMeta = {
     title: 'SocialSnack',
     description: 'Una playlist que te hará vibrar.',
-    cover: 'http://miseriehbo.com/images/cover-ballers.jpg'
+    cover: `${APP_ROOT}/images/cover-ballers.jpg`
   };
 
   return {
