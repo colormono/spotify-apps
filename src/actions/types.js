@@ -5,6 +5,8 @@ export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 
 // Analyzer
+export const ANALYZER_START = 'analyzer_start';
+export const ANALYZER_SUCCESS = 'analyzer_success';
 export const SET_USER_INFO = 'set_user_info';
 export const SET_USER_TOP_TRACKS = 'set_user_top_tracks';
 export const SET_USER_TOP_ARTISTS = 'set_user_top_artists';

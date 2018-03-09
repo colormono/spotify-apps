@@ -511,12 +511,11 @@ a {
   .section-resultado figure {
     max-width: 340px;
     margin: 1em auto 0; }
-
-.spinner {
-  height: 280px;
-  display: flex;
-  align-items: center;
-  justify-content: center; }
+  .section-resultado .spinner {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
 
 .playlist-container {
   width: 300px;

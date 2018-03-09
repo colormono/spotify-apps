@@ -8,4 +8,5 @@ export * from './Playlist';
 export * from './PoweredBy';
 export * from './SharingButtons';
 export * from './SocialButtons';
+export * from './Spinner';
 export * from './VideoPlayer';

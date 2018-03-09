@@ -1,4 +1,6 @@
 import {
+  ANALYZER_START,
+  ANALYZER_SUCCESS,
   SET_USER_RECENTLY_PLAYED,
   SET_USER_TOP_TRACKS,
   SET_USER_TOP_ARTISTS,
@@ -8,6 +10,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  analyzed: false,
   topArtists: null,
   topTracks: null,
   recentlyPlayed: null,
@@ -17,6 +20,12 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
+    case ANALYZER_START:
+      return { ...state, analyzed: false }
+
+    case ANALYZER_SUCCESS:
+      return { ...state, analyzed: true }
 
     case SET_USER_TOP_ARTISTS:
       return { ...state, topArtists: action.payload };

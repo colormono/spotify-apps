@@ -5,6 +5,8 @@ import { APP_ROOT } from '../config';
 import { store } from '../index';
 
 import {
+  ANALYZER_START,
+  ANALYZER_SUCCESS,
   SET_USER_INFO,
   SET_USER_RECENTLY_PLAYED,
   SET_USER_TOP_ARTISTS,
@@ -18,6 +20,7 @@ export const analyzeUserProfile = () => {
   return (dispatch, getState) => {
     const state = store.getState();
     const token = state.auth.accessToken;
+    dispatch(analizerStart());
 
     // Instancia de Spotify Web API
     const s = new SpotifyWebApi();
@@ -31,7 +34,20 @@ export const analyzeUserProfile = () => {
       .then(response => dispatch(getGenreScore(response.payload)))
       .then(response => dispatch(setRecommendation(response.payload)))
       .then(() => dispatch(setPlaylistMeta()))
+      .then(() => dispatch(analizerSuccess()))
       .catch(() => dispatch({ type: LOGOUT_USER }));
+  }
+}
+
+const analizerStart = () => {
+  return {
+    type: ANALYZER_START
+  }
+}
+
+const analizerSuccess = () => {
+  return {
+    type: ANALYZER_SUCCESS
   }
 }
 
