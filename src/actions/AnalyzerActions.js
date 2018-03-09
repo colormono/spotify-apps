@@ -14,7 +14,7 @@ import {
   LOGOUT_USER
 } from './types';
 
-export const analizeUserProfile = () => {
+export const analyzeUserProfile = () => {
   return (dispatch, getState) => {
     const state = store.getState();
     const token = state.auth.accessToken;
@@ -23,7 +23,7 @@ export const analizeUserProfile = () => {
     const s = new SpotifyWebApi();
     s.setAccessToken(token);
 
-    // Analizar usuario
+    // Analyzar usuario
     s.getMe()
       .then(response => dispatch(setUserInfo(response)))
       .then(() => dispatch(fetchUserRecentlyPlayed(s)))
@@ -180,7 +180,7 @@ const setPlaylistMeta = () => {
   }
 }
 
-// const analizerSuccess = () => {
+// const analyzerSuccess = () => {
 //   return {
 //     type: SET_PLAYLIST_META,
 //     payload: playlistMeta

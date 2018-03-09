@@ -4,15 +4,15 @@ import ReactGA from 'react-ga';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { VideoPlayer } from './common';
-import { analizeUserProfile } from '../actions';
+import { analyzeUserProfile } from '../actions';
 
-class Analizer extends Component {
+class Analyzer extends Component {
   state = {
     showButton: false
   }
 
   componentWillMount() {
-    this.props.analizeUserProfile();
+    this.props.analyzeUserProfile();
   }
 
   componentDidMount() {
@@ -41,10 +41,10 @@ class Analizer extends Component {
 
   render() {
     return (
-      <section className="section-analizer">
+      <section className="section-analyzer">
         <VideoPlayer />
 
-        <div className="analizer-info">
+        <div className="analyzer-info">
           {this.renderButton()}
         </div>
       </section>
@@ -52,4 +52,4 @@ class Analizer extends Component {
   }
 }
 
-export default withRouter(connect(null, { analizeUserProfile })(Analizer));
+export default withRouter(connect(null, { analyzeUserProfile })(Analyzer));

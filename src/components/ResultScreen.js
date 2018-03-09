@@ -83,7 +83,7 @@ function mapStateToProps(state) {
   return {
     baseUri: state.config.baseUri,
     playlist: state.result.playlist,
-    score: state.analizer.score
+    score: state.analyzer.score
   }
 }
 

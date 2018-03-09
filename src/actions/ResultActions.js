@@ -34,7 +34,7 @@ const create = () => {
   const token = state.auth.accessToken;
 
   // Playlist data
-  const recommendations = state.analizer.recommendations;
+  const recommendations = state.analyzer.recommendations;
   const userId = state.auth.user.id;
   const playlistMeta = state.result.playlist.meta;
   let playlistTracks = [];

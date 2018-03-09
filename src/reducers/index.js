@@ -1,11 +1,11 @@
 import GenresReducer from './GenresReducer';
 import AuthReducer from './AuthReducer';
-import AnalizerReducer from './AnalizerReducer';
+import AnalyzerReducer from './AnalyzerReducer';
 import ResultReducer from './ResultReducer';
 
 const reducers = {
   auth: AuthReducer,
-  analizer: AnalizerReducer,
+  analyzer: AnalyzerReducer,
   result: ResultReducer,
   genres: GenresReducer
 };

@@ -9,7 +9,7 @@ import { Header, SocialButtons, PoweredBy } from './components/common';
 // Views
 import Callback from './components/Callback';
 import HomeScreen from './components/HomeScreen';
-import AnalizerScreen from './components/AnalizerScreen';
+import AnalyzerScreen from './components/AnalyzerScreen';
 import ResultScreen from './components/ResultScreen';
 import ProfileScreen from './components/ProfileScreen';
 
@@ -32,7 +32,7 @@ class App extends Component {
             <section className="main">
               <Route exact path='/' component={HomeScreen} />
               <Route path='/callback' component={Callback} />
-              <Route path='/analizando' component={RequireAuth(AnalizerScreen)} />
+              <Route path='/analizando' component={RequireAuth(AnalyzerScreen)} />
               <Route path='/resultado' component={RequireAuth(ResultScreen)} />
               <Route path='/perfil' component={RequireAuth(ProfileScreen)} />
             </section>

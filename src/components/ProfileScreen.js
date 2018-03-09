@@ -20,8 +20,8 @@ class Game extends Component {
 function mapStateToProps(state) {
   return {
     user: state.auth.user,
-    artists: state.analizer.topArtists,
-    tracks: state.analizer.topTracks,
+    artists: state.analyzer.topArtists,
+    tracks: state.analyzer.topTracks,
   }
 }
 
