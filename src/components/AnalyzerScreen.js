@@ -16,12 +16,6 @@ class Analyzer extends Component {
     this.props.analyzeUserProfile();
   }
 
-  componentDidMount() {
-    if (this.props.analyzed) {
-      _.delay(() => this.setState({ canContinue: true }), 5000);
-    }
-  }
-
   onButtonPress() {
     ReactGA.event({
       category: 'Clicks',
@@ -32,6 +26,10 @@ class Analyzer extends Component {
 
   renderContent() {
     const { canContinue, redirect } = this.state;
+
+    if (this.props.analyzed) {
+      _.delay(() => this.setState({ canContinue: true }), 3000);
+    }
 
     if (canContinue && redirect) {
       return <Redirect to={`${process.env.PUBLIC_URL}/resultado`} />

@@ -12,6 +12,8 @@ import HomeScreen from './components/HomeScreen';
 import AnalyzerScreen from './components/AnalyzerScreen';
 import ResultScreen from './components/ResultScreen';
 import ProfileScreen from './components/ProfileScreen';
+import PixiTest from './components/PixiTest';
+import PixiFiberTest from './components/PixiFiberTest';
 
 // Styles
 import './styles/App.css';
@@ -35,6 +37,8 @@ class App extends Component {
               <Route path='/analizando' component={RequireAuth(AnalyzerScreen)} />
               <Route path='/resultado' component={RequireAuth(ResultScreen)} />
               <Route path='/perfil' component={RequireAuth(ProfileScreen)} />
+              <Route path='/test' component={PixiTest} />
+              <Route path='/test2' component={PixiFiberTest} />
             </section>
             <footer className="footer">
               <SocialButtons />

@@ -481,13 +481,13 @@ a {
   max-width: 1024px;
   margin: 0px auto; }
 
-.footer {
+.poweredBy {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1em;
   color: #fff; }
-  .footer span {
+  .poweredBy span {
     margin-left: 0.66em;
     width: 90px; }
 
@@ -562,3 +562,10 @@ a {
 
 .social-buttons a {
   padding: 0.33em; }
+
+.appCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }

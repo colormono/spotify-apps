@@ -131,7 +131,9 @@ a {
   margin: 0px auto;
 }
 
-.footer {
+.footer{}
+
+.poweredBy {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -248,4 +250,14 @@ a {
   a{
     padding: 0.33em;
   }
+}
+
+
+// PIXI Tests
+.appCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

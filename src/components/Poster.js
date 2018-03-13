@@ -6,12 +6,6 @@ import { Sprite, Text, Stage } from 'react-pixi-fiber';
 import * as PIXI from 'pixi.js';
 import bunny from "../images/logo.png";
 
-function Bunny(props) {
-  return (
-    <Sprite texture={PIXI.Texture.fromImage(bunny)} {...props} />
-  );
-}
-
 const Poster = (props) => {
   return (
     <Stage width={320} height={600} options={{ backgroundColor: 0x10bb99 }}>
