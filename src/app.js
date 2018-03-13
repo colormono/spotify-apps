@@ -7,7 +7,7 @@ import ReactGA from 'react-ga';
 import { Header, SocialButtons, PoweredBy } from './components/common';
 
 // Views
-import Callback from './components/Callback';
+import Callback from './components/auth/Callback';
 import HomeScreen from './components/HomeScreen';
 import AnalyzerScreen from './components/AnalyzerScreen';
 import ResultScreen from './components/ResultScreen';
@@ -32,13 +32,16 @@ class App extends Component {
           <div className="app-container">
             <Header />
             <section className="main">
-              <Route exact path='/' component={HomeScreen} />
-              <Route path='/callback' component={Callback} />
-              <Route path='/analizando' component={RequireAuth(AnalyzerScreen)} />
-              <Route path='/resultado' component={RequireAuth(ResultScreen)} />
-              <Route path='/perfil' component={RequireAuth(ProfileScreen)} />
-              <Route path='/test' component={PixiTest} />
-              <Route path='/test2' component={PixiFiberTest} />
+              <Route exact path="/" component={HomeScreen} />
+              <Route path="/callback" component={Callback} />
+              <Route
+                path="/analizando"
+                component={RequireAuth(AnalyzerScreen)}
+              />
+              <Route path="/resultado" component={RequireAuth(ResultScreen)} />
+              <Route path="/perfil" component={RequireAuth(ProfileScreen)} />
+              <Route path="/test" component={PixiTest} />
+              <Route path="/test2" component={PixiFiberTest} />
             </section>
             <footer className="footer">
               <SocialButtons />

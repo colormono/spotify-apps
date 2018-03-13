@@ -1,6 +1,5 @@
 export * from './Banner';
 export * from './Button';
-export * from './ButtonLogin';
 export * from './CircularSlider';
 export * from './Header';
 export * from './Loading';

@@ -13,13 +13,12 @@ import {
   SET_RECOMMENDATIONS,
   SET_USER_SCORE,
   SET_PLAYLIST_META,
-  LOGOUT_USER
+  UNAUTH_USER
 } from './types';
 
 export const analyzeUserProfile = () => {
   return (dispatch, getState) => {
-    const state = store.getState();
-    const token = state.auth.accessToken;
+    const token = localStorage.getItem('token');
     dispatch(analyzerStart());
 
     // Instancia de Spotify Web API
@@ -30,13 +29,21 @@ export const analyzeUserProfile = () => {
     s
       .getMe()
       .then(response => dispatch(setUserInfo(response)))
-      //.then(() => dispatch(fetchUserRecentlyPlayed(s)))
+      .then(() => dispatch(fetchUserRecentlyPlayed(s)))
       .then(() => dispatch(fetchUserTopArtists(s)))
       .then(response => dispatch(getGenreScore(response.payload)))
       .then(response => dispatch(setRecommendation(response.payload)))
-      .then(() => dispatch(setPlaylistMeta()))
+      .then(() =>
+        dispatch(
+          setPlaylistMeta({
+            title: 'SocialSnack',
+            description: 'Una playlist que te hará vibrar.',
+            cover: `${APP_ROOT}/images/cover-ballers.jpg`
+          })
+        )
+      )
       .then(() => dispatch(analyzerSuccess()))
-      .catch(() => dispatch({ type: LOGOUT_USER }));
+      .catch(() => dispatch({ type: UNAUTH_USER }));
   };
 };
 
@@ -187,13 +194,7 @@ const setRecommendation = scores => {
   };
 };
 
-const setPlaylistMeta = () => {
-  let playlistMeta = {
-    title: 'SocialSnack',
-    description: 'Una playlist que te hará vibrar.',
-    cover: `${APP_ROOT}/images/cover-ballers.jpg`
-  };
-
+const setPlaylistMeta = playlistMeta => {
   return {
     type: SET_PLAYLIST_META,
     payload: playlistMeta

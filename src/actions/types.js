@@ -1,8 +1,8 @@
 // Auth
-export const LOGIN_USER = 'login_user';
-export const LOGOUT_USER = 'logout_user';
-export const LOGIN_USER_SUCCESS = 'login_user_success';
-export const LOGIN_USER_FAIL = 'login_user_fail';
+export const AUTH_USER = 'auth_user';
+export const AUTH_USER_SUCCESS = 'auth_user_success';
+export const AUTH_USER_FAIL = 'auth_user_fail';
+export const UNAUTH_USER = 'logout_user';
 
 // Analyzer
 export const ANALYZER_START = 'analyzer_start';

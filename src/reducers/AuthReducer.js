@@ -1,47 +1,41 @@
 import {
-  LOGIN_USER,
-  LOGOUT_USER,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAIL,
+  AUTH_USER,
+  AUTH_USER_SUCCESS,
+  AUTH_USER_FAIL,
+  UNAUTH_USER,
   SET_USER_INFO
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  loading: false,
-  userLogin: false,
-  accessToken: '',
+  authentificated: false,
   error: '',
   user: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case AUTH_USER:
+      return { ...state, error: '' };
 
-    case LOGIN_USER:
-      return { ...state, loading: true, error: '' };
-
-    case LOGOUT_USER:
-      return INITIAL_STATE;
-
-    case LOGIN_USER_SUCCESS:
+    case AUTH_USER_SUCCESS:
       return {
         ...state,
         ...INITIAL_STATE,
-        accessToken: action.payload,
-        userLogin: true
+        authentificated: true
       };
 
-    case LOGIN_USER_FAIL:
+    case AUTH_USER_FAIL:
       return {
         ...state,
-        error: 'Authentification Failed.',
-        accessToken: '',
-        loading: false,
-        userLogin: false
+        authentificated: false,
+        error: action.payload
       };
 
+    case UNAUTH_USER:
+      return INITIAL_STATE;
+
     case SET_USER_INFO:
-      return { ...state, user: action.payload }
+      return { ...state, user: action.payload };
 
     default:
       return state;

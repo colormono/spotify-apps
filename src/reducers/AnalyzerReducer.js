@@ -16,16 +16,15 @@ const INITIAL_STATE = {
   recentlyPlayed: null,
   recommendations: {},
   score: {}
-}
+};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-
     case ANALYZER_START:
-      return { ...state, analyzed: false }
+      return { ...state, analyzed: false };
 
     case ANALYZER_SUCCESS:
-      return { ...state, analyzed: true }
+      return { ...state, analyzed: true };
 
     case SET_USER_TOP_ARTISTS:
       return { ...state, topArtists: action.payload };
@@ -37,15 +36,15 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, recentlyPlayed: action.payload };
 
     case SET_RECOMMENDATIONS:
-      return { ...state, recommendations: action.payload }
+      return { ...state, recommendations: action.payload };
 
     case SET_RECOMMENDATIONS_WITH_SEEDS:
-      return { ...state, recommendations: action.payload }
+      return { ...state, recommendations: action.payload };
 
     case SET_USER_SCORE:
-      return { ...state, score: action.payload }
+      return { ...state, score: action.payload };
 
     default:
       return state;
   }
-}
+};

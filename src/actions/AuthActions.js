@@ -1,25 +1,24 @@
-import {
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAIL
-} from './types';
+import { AUTH_USER_SUCCESS, AUTH_USER_FAIL } from './types';
 
-export const loginUser = ({ token = null }) => {
-  return (dispatch) => {
+export const authUser = ({ token = null }) => {
+  return dispatch => {
     if (token) {
-      loginUserSuccess(dispatch, token);
+      authUserSuccess(dispatch, token);
     } else {
-      loginUserFail(dispatch);
+      authUserFail(dispatch);
     }
   };
 };
 
-const loginUserSuccess = (dispatch, token) => {
-  dispatch({
-    type: LOGIN_USER_SUCCESS,
-    payload: token
-  });
+const authUserSuccess = (dispatch, token) => {
+  // Save the JWT token and redirect
+  localStorage.setItem('token', token);
+  dispatch({ type: AUTH_USER_SUCCESS });
 };
 
-const loginUserFail = (dispatch) => {
-  dispatch({ type: LOGIN_USER_FAIL });
+const authUserFail = (dispatch, error) => {
+  dispatch({
+    type: AUTH_USER_FAIL,
+    payload: error
+  });
 };
