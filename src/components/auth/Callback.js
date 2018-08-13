@@ -45,7 +45,7 @@ class Callback extends Component {
     }
 
     // Autorización exitosa
-    return <Redirect to={`${process.env.PUBLIC_URL}/analizando`} />;
+    return <Redirect to={`${process.env.PUBLIC_URL}/trivia`} />;
   }
 }
 
@@ -55,4 +55,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { authUser })(withRouter(Callback));
+export default connect(
+  mapStateToProps,
+  { authUser }
+)(withRouter(Callback));

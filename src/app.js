@@ -10,6 +10,7 @@ import { Header, SocialButtons, PoweredBy } from './components/common';
 import Callback from './components/auth/Callback';
 import HomeScreen from './components/HomeScreen';
 import AnalyzerScreen from './components/AnalyzerScreen';
+import TriviaScreen from './components/TriviaScreen';
 import ResultScreen from './components/ResultScreen';
 import ProfileScreen from './components/ProfileScreen';
 import PixiTest from './components/PixiTest';
@@ -38,6 +39,7 @@ class App extends Component {
                 path="/analizando"
                 component={RequireAuth(AnalyzerScreen)}
               />
+              <Route path="/trivia" component={RequireAuth(TriviaScreen)} />
               <Route path="/resultado" component={RequireAuth(ResultScreen)} />
               <Route path="/perfil" component={RequireAuth(ProfileScreen)} />
               <Route path="/test" component={PixiTest} />

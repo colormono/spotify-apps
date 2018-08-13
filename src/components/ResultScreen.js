@@ -9,36 +9,45 @@ import UserScore from './UserScore';
 
 class ResultScreen extends Component {
   componentWillMount() {
-    //this.props.createCustomPlaylist();
+    this.props.createCustomPlaylist();
   }
 
   render() {
     const { id, user, loading } = this.props.playlist;
 
     return (
-      <section className='section-resultado'>
-
-        <hgroup className='resultado-header'>
-          <Button ga='CTA Click' url='https://www.nike.com/ar/es_la/c/innovation/react'>
+      <section className="section-resultado">
+        <hgroup className="resultado-header">
+          <Button
+            ga="CTA Click"
+            url="https://www.nike.com/ar/es_la/c/innovation/react"
+          >
             <h2>TITULO CTA</h2>
-            <p>Reprehenderit dignissimos ut. Qui qui magnam omnis dolorem occaecati architecto labore non repellendus. Aliquid labore nemo sit accusantium.</p>
-            <span className='btn btn-primary'>BOTÓN CTA</span>
+            <p>
+              Reprehenderit dignissimos ut. Qui qui magnam omnis dolorem
+              occaecati architecto labore non repellendus. Aliquid labore nemo
+              sit accusantium.
+            </p>
+            <span className="btn btn-primary">BOTÓN CTA</span>
           </Button>
         </hgroup>
 
-        <article className='resultado-playlist'>
+        <article className="resultado-playlist">
           <Playlist user={user} id={id} loading={loading} />
         </article>
 
-        <aside className='resultado-share'>
-          <SharingButtons shareUrl={`${APP_ROOT}/share.html`} tweet='Ya tengo mi playlist de XXX!' hashtags={['brand', 'playlist', 'music']} />
+        <aside className="resultado-share">
+          <SharingButtons
+            shareUrl={`${APP_ROOT}/share.html`}
+            tweet="Ya tengo mi playlist de XXX!"
+            hashtags={['brand', 'playlist', 'music']}
+          />
         </aside>
 
-        <aside className='resultado-score'>
+        <aside className="resultado-score">
           <UserScore />
-          <Poster genre='rock' name={user} />
+          <Poster genre="rock" name={user} />
         </aside>
-
       </section>
     );
   }
@@ -47,7 +56,12 @@ class ResultScreen extends Component {
 function mapStateToProps(state) {
   return {
     playlist: state.result.playlist
-  }
+  };
 }
 
-export default withRouter(connect(mapStateToProps, { createCustomPlaylist })(ResultScreen));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createCustomPlaylist }
+  )(ResultScreen)
+);
